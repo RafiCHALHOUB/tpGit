@@ -1,0 +1,52 @@
+"""
+Os module.
+"""
+from os import path
+
+
+ADN_LIST = ("A", "C", "G", "T")
+
+
+def adn_read(fastafile):
+    """Takes a fasta type of file as an argument,
+       verifies if it exists then verifies its extension and
+       if the verification process is valid it opens and
+       the file  line by line while it verifies
+       it's content as if the nucleotides are A
+       or C or G or T
+
+    Args:
+        fastafile (file): starts with a '<' at it's first line and then followed by a DNA sequence
+    """
+    if path.exists(fastafile) is True:
+        print("this file exists")
+        if fastafile.endswith('.fasta') or fastafile.endswith('.fa'):
+            print("This is a fasta file extension.")
+            with open(fastafile, "r", encoding='UTF-8') as file:
+                lines = file.readlines()
+                print(lines)
+                counter = 0
+                header = ""
+                for line in lines:
+                    counter += 1
+
+                    if line[0] == ">":
+                        header = line.strip()
+                    else:
+                        line = line.strip()
+                        line = line.upper()
+                        column_counter = 0
+                        for char in line:
+                            column_counter += 1
+                            if char not in ADN_LIST:
+                                print(char + " It's not a nucl in line " + str(counter) +
+                                      " and column " + str(column_counter) + " for sequence " +
+                                      header[1:] + fastafile)
+        else:
+            print("error:this is not the right file extension")
+    else:
+        print("file does not exist")
+
+
+adn_read(fastafile="filefasta.fa")
+
