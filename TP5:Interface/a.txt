@@ -1,0 +1,4 @@
+Human,25,omnivore,4,Mohamed
+Human,22,Omnivore,2,Rafi
+Human,24,Omnivore,2,Djalal
+Human,24,Omnivore,2,Rahma
